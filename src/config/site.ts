@@ -6,6 +6,8 @@ type Site = {
   name: string;
   legalName: string;
   url: string;
+  /** Search engines may index the site only once the real domain is configured. */
+  indexable: boolean;
   phone: string;
   whatsapp?: string;
   email: string;
@@ -17,8 +19,15 @@ type Site = {
 export const site: Site = {
   name: "MOBI FLOR",
   legalName: "Antoniciuc Florin Întreprindere Individuală",
-  // Production domain, no trailing slash. PLACEHOLDER until the real domain is registered.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mobiflor.ro",
+  // Canonical origin, no trailing slash. Set NEXT_PUBLIC_SITE_URL to the real domain at launch;
+  // until then a Vercel deployment uses its own production address (so share previews work).
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://www.mobiflor.ro"),
+  // Draft deployments (no real domain yet) are kept out of search results.
+  indexable: Boolean(process.env.NEXT_PUBLIC_SITE_URL),
   phone: "+40 749 379 396",
   whatsapp: "40749379396", // digits only, used for wa.me links
   email: "floringeta1975antoni@gmail.com",

@@ -64,11 +64,13 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
       title: dict.meta.title,
       description: dict.meta.description,
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
-    },
+    robots: site.indexable
+      ? {
+          index: true,
+          follow: true,
+          googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+        }
+      : { index: false, follow: false },
     category: "furniture",
   };
 }
