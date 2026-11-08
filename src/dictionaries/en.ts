@@ -1,0 +1,183 @@
+import type { Dictionary } from "./ro";
+
+const en: Dictionary = {
+  meta: {
+    title: "Custom Furniture in Suceava | Kitchens, Wardrobes, Bedrooms",
+    description:
+      "MOBI FLOR, custom furniture in Suceava, Romania: kitchens, wardrobes, bedrooms, wall panelling and commercial fit-outs, made to measure and installed by us.",
+    keywords: [
+      "custom furniture Suceava",
+      "custom kitchens Suceava",
+      "custom wardrobes Suceava",
+      "made to measure furniture Romania",
+      "bespoke furniture",
+      "MOBI FLOR",
+    ],
+    ogAlt: "White custom kitchen with an LED-lit island, made by MOBI FLOR",
+  },
+  a11y: {
+    skip: "Skip to content",
+    menu: "Menu",
+    closeMenu: "Close menu",
+    language: "Language",
+    scroll: "Scroll",
+  },
+  nav: {
+    services: "Services",
+    work: "Work",
+    process: "Process",
+    faq: "FAQ",
+    contact: "Contact",
+    cta: "Get a quote",
+  },
+  hero: {
+    eyebrow: "Custom furniture in Suceava",
+    title: "Custom furniture, crafted like a signature piece.",
+    lede: "We design, build and install kitchens, wardrobes and complete interiors, made to fit your home and the way you live.",
+    primary: "Request a quote",
+    secondary: "See our work",
+    imageAlt: "White custom kitchen with a black worktop and an island with a geometric LED pattern",
+  },
+  intro: {
+    eyebrow: "About us",
+    title: "Every piece begins with a conversation and ends with a careful installation.",
+    body: [
+      "MOBI FLOR makes custom furniture in Suceava and the surrounding area. We handle every project from measuring and the proposal through to the final installation.",
+      "Each piece is designed for its space: from island kitchens and LED-lit wardrobes to attic wardrobes under sloped ceilings and furniture for commercial spaces.",
+    ],
+    imageAlt: "Detail of a sage green kitchen with a hob, wood-effect worktop and warm under-cabinet lighting",
+  },
+  services: {
+    eyebrow: "What we make",
+    title: "Custom furniture for every space",
+  },
+  service: {
+    crumb: "Services",
+    offerings: "What we make",
+    related: "Projects we've made",
+    process: "How we work",
+    more: "Learn more",
+  },
+  work: {
+    eyebrow: "Portfolio",
+    title: "Our work",
+    lede: "A selection of projects made by MOBI FLOR. Open a project to see all its photos.",
+    all: "All",
+    filterLabel: "Filter projects by category",
+    photos: "photos",
+    view: "View project",
+    prev: "Previous projects",
+    next: "Next projects",
+    categories: {
+      kitchen: "Kitchens",
+      wardrobe: "Wardrobes & bedrooms",
+      living: "Living & panelling",
+      commercial: "Commercial",
+    },
+  },
+  project: {
+    home: "Home",
+    projects: "Projects",
+    breadcrumb: "Breadcrumb",
+    highlights: "What the project includes",
+    metaSuffix: "A project by MOBI FLOR, custom furniture in Suceava.",
+    service: "Service",
+    gallery: "Photo gallery",
+    category: "Category",
+    open: "Enlarge photo",
+    close: "Close",
+    prev: "Previous photo",
+    next: "Next photo",
+    prevProject: "Previous project",
+    nextProject: "Next project",
+    ctaTitle: "Want something similar?",
+    ctaBody: "Tell us about your space and what you have in mind. We'll come back with a proposal.",
+    ctaButton: "Request a quote",
+  },
+  process: {
+    eyebrow: "Process",
+    title: "From idea to installation in four steps",
+    steps: [
+      {
+        title: "Conversation & measuring",
+        body: "We talk about what you want, see the space and take exact measurements, including alcoves, slopes and awkward corners.",
+        imageAlt: "Custom wardrobe fitted under a sloped attic ceiling",
+      },
+      {
+        title: "Proposal & quote",
+        body: "Together we choose the materials, colours and interior layout, then you receive the quote for the project.",
+        imageAlt: "Wardrobe interior with drawers, shelves and a pull-down hanging rail",
+      },
+      {
+        title: "Production",
+        body: "The furniture is made to measure following the agreed design, with care for every front and every joint.",
+        imageAlt: "Custom kitchen being installed, with greige fronts and black tall units",
+      },
+      {
+        title: "Installation",
+        body: "We install the furniture in place, protect your space while we work and hand everything over clean and working.",
+        imageAlt: "Furniture installation in a commercial space",
+      },
+    ],
+  },
+  interlude: {
+    text: "Every space has a story. We build its furniture.",
+    imageAlt: "Tall LED-lit display cabinets made to order for a scale model car collection",
+  },
+  faq: {
+    eyebrow: "FAQ",
+    title: "Good to know",
+    items: [
+      {
+        q: "How much does custom furniture cost?",
+        a: "Pricing depends on dimensions, materials, finishes and hardware. Once we've seen the space and discussed what you want, we send you a quote for your project.",
+      },
+      {
+        q: "How long does a custom kitchen take?",
+        a: "It depends on the complexity of the project and the materials chosen. We agree the production and installation timeline together, in the quote.",
+      },
+      {
+        q: "Which areas do you work in?",
+        a: "We work in Suceava and Suceava County. For other areas, get in touch and we'll see together whether we can take on the project.",
+      },
+      {
+        q: "What kind of furniture do you make?",
+        a: "Kitchens, dressing rooms, wardrobes, bedrooms, hallway and office furniture, wall panelling and dividers, as well as furniture for commercial spaces.",
+      },
+    ],
+  },
+  contact: {
+    eyebrow: "Contact",
+    title: "Let's build something beautiful together",
+    lede: "Tell us a little about your project and we'll get back to you as soon as possible with next steps.",
+    form: {
+      name: "Name",
+      phone: "Phone",
+      email: "Email",
+      type: "Project type",
+      typePlaceholder: "Choose an option",
+      types: ["Kitchen", "Wardrobe / closet", "Bedroom", "Living / panelling", "Office / hallway", "Commercial space", "Something else"],
+      message: "Message",
+      messagePlaceholder: "Approximate dimensions, style, preferred timeline…",
+      consent: "I agree that my details may be used to contact me about this request.",
+      submit: "Send request",
+      sending: "Sending…",
+      success: "Thank you! We've received your request and will be in touch soon.",
+      error: "Please check the highlighted fields and try again.",
+      required: "Required field",
+      invalidEmail: "Please enter a valid email address",
+    },
+    direct: "Or reach us directly",
+    call: "Call",
+    whatsapp: "WhatsApp",
+    write: "Email",
+    area: "Area",
+  },
+  footer: {
+    tagline: "Custom furniture in Suceava, Romania.",
+    rights: "All rights reserved.",
+    country: "Romania",
+  },
+};
+
+export default en;

@@ -1,26 +1,228 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0d0b09;
+  --color-coal: #16130f;
+  --color-char: #1f1a15;
+  --color-bone: #ede5d8;
+  --color-sand: #b9ad9b;
+  --color-mute: #8a8073;
+  --color-brass: #c9a46a;
+  --color-brass-soft: #e0c597;
+  --color-walnut: #5b3f2b;
+  --color-line: rgb(237 229 216 / 0.12);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+
+  --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-brass);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Native smooth scrolling for anchor links (menu, "Cere ofertă"); off with reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Anchored sections clear the fixed header */
+section[id] {
+  scroll-margin-top: 4rem;
+}
+
+/* ---------- Hero ---------- */
+.kenburns {
+  animation: kenburns 24s var(--ease-cine) both;
+  transform-origin: 60% 40%;
+}
+@keyframes kenburns {
+  from { transform: scale(1.18); }
+  to { transform: scale(1.02); }
+}
+
+/* Letterbox bars that open on load */
+.letterbox::before,
+.letterbox::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--color-ink);
+  z-index: 5;
+  animation: letterbox 1.6s var(--ease-cine) 0.15s both;
+  pointer-events: none;
+}
+.letterbox::before { top: 0; transform-origin: top; }
+.letterbox::after { bottom: 0; transform-origin: bottom; }
+@keyframes letterbox {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0.07); }
+}
+
+/* Word-by-word rise. Words are painted from the first frame (no clipping, no opacity 0):
+   they start slightly low and out of focus, then settle. Hiding them would delay LCP. */
+.rise-word {
+  display: inline-block;
+  vertical-align: top;
+}
+.rise-word > span {
+  display: inline-block;
+  animation: rise 1.4s var(--ease-cine) both;
+  animation-delay: calc(0.15s + var(--i, 0) * 0.07s);
+}
+@keyframes rise {
+  from { transform: translateY(0.3em); filter: blur(10px); }
+  to { transform: none; filter: none; }
+}
+
+/* Like .rise-word for any block: visible from the first frame, so it never delays LCP. */
+.focus-in {
+  animation: rise 1.4s var(--ease-cine) both;
+  animation-delay: var(--d, 0s);
+}
+
+.fade-in {
+  animation: fadeIn 1.2s var(--ease-cine) both;
+  animation-delay: var(--d, 1.2s);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+.scroll-cue {
+  animation: cue 2.2s var(--ease-cine) infinite;
+}
+@keyframes cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- Scroll reveals (only hidden when JS is running) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1.1s var(--ease-cine),
+    transform 1.1s var(--ease-cine);
+  transition-delay: var(--d, 0s);
+}
+/* The clip goes on the child: a clipped element itself never reports as intersecting. */
+.js [data-reveal="mask"] {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="mask"] > * {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.4s var(--ease-cine);
+  transition-delay: var(--d, 0s);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="mask"].is-in > * {
+  clip-path: inset(0 0 0 0);
+}
+
+/* FAQ disclosure */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
+
+/* ---------- Scroll-driven motion (CSS only, no JavaScript) ----------
+   Runs on the compositor where supported (Chrome/Edge, Safari 26+). Elsewhere, or with
+   reduced motion, elements simply stay still. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Hero: image sinks, copy rises and fades as the hero scrolls away. */
+    .hero-drift {
+      animation: hero-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+    .hero-lift {
+      animation: hero-lift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 70svh;
+    }
+
+    /* Parallax photo: the frame defines the timeline, the oversized inner layer drifts. */
+    .parallax-frame {
+      view-timeline-name: --parallax;
+    }
+    .parallax-layer {
+      animation: parallax linear both;
+      animation-timeline: --parallax;
+      animation-range: cover;
+    }
+  }
+}
+@keyframes hero-drift {
+  to { transform: translateY(25%); }
+}
+@keyframes hero-lift {
+  to { transform: translateY(-40%); opacity: 0; }
+}
+@keyframes parallax {
+  from { transform: translateY(calc(var(--strength, 12) * -1%)); }
+  to { transform: translateY(calc(var(--strength, 12) * 1%)); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .scroll-cue {
+    animation: none !important;
+  }
+  .js [data-reveal],
+  .js [data-reveal="mask"] > * {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
 }

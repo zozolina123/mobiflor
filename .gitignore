@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# original work photos (processed copies live in src/assets/projects)
+/proiecte/
+/.next-verify/
