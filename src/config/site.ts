@@ -28,8 +28,8 @@ export const site: Site = {
       : "https://www.mobiflor.ro"),
   // Draft deployments (no real domain yet) are kept out of search results.
   indexable: Boolean(process.env.NEXT_PUBLIC_SITE_URL),
-  phone: "+40 749 379 396",
-  whatsapp: "40749379396", // digits only, used for wa.me links
+  phone: "+40 748 379 396",
+  whatsapp: "40748379396", // digits only, used for wa.me links
   email: "floringeta1975antoni@gmail.com",
   address: {
     city: "Suceava",
